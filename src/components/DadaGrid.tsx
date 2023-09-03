@@ -6,14 +6,15 @@ import GameCard from "./GameCard";
 import GameCardContainer from "./GameCardContainer";
 import GameCardSkeleton from "./GameCardSkeleton";
 import useAppointments from "../hooks/useAppointments";
+import DoctorCard from "./DoctorCard";
 
 interface Props {
   gameQuery: GameQuery;
 }
 
-const GameGrid = ({ gameQuery }: Props) => {
-  const { data, error, isLoading } = useGames(gameQuery);
-  // const { data, error, loading } = useAppointments();
+const DataGrid = () => {
+  //   const { data, error, isLoading } = useGames(gameQuery);
+  const { data, error, loading } = useAppointments();
   const skeletons = [1, 2, 3, 4, 5, 6];
 
   if (error) return <Text>{error}</Text>;
@@ -24,19 +25,20 @@ const GameGrid = ({ gameQuery }: Props) => {
       padding="10px"
       spacing={6}
     >
-      {isLoading &&
+      {loading &&
         skeletons.map((skeleton) => (
           <GameCardContainer key={skeleton}>
             <GameCardSkeleton />
           </GameCardContainer>
         ))}
-      {data.map((game) => (
-        <GameCardContainer key={game.id}>
-          <GameCard game={game} />
+      {data.map((doctor) => (
+        <GameCardContainer key={doctor.id}>
+          {/* <GameCard game={game} /> */}
+          <DoctorCard doctor={doctor} />
         </GameCardContainer>
       ))}
     </SimpleGrid>
   );
 };
 
-export default GameGrid;
+export default DataGrid;
