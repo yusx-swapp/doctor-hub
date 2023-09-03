@@ -14,7 +14,7 @@ interface Props {
 
 const DataGrid = () => {
   //   const { data, error, isLoading } = useGames(gameQuery);
-  const { data, error, loading } = useAppointments();
+  const { data, error, isLoading } = useAppointments();
   const skeletons = [1, 2, 3, 4, 5, 6];
 
   if (error) return <Text>{error}</Text>;
@@ -25,7 +25,7 @@ const DataGrid = () => {
       padding="10px"
       spacing={6}
     >
-      {loading &&
+      {isLoading &&
         skeletons.map((skeleton) => (
           <GameCardContainer key={skeleton}>
             <GameCardSkeleton />
